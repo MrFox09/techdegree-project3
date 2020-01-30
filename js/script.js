@@ -4,7 +4,7 @@
 const jobRoleOptions = document.querySelector('#title');
 const designOptions = document.querySelector('#design');
 const colorOptions = document.querySelector('#color');
-//Job-Role Section
+//*** Job-Role Section ***//
 
 // set the focus to the first input field "Name" with jQuery
 $( document ).ready( () => {
@@ -29,7 +29,7 @@ jobRoleOptions.addEventListener('change', () => {
 });
 
 
-// T-Shirt Info section
+//*** T-Shirt Info section ***//
 
 //function
 //to show the right T-shirt colors depending on which design is chosen
@@ -83,7 +83,38 @@ designOptions.addEventListener('change', (event)=>{
 
 });
 
-// Register for Activities Section
+//*** Register for Activities Section***//
 
-const registerActivities = document.getElementsByClassName('activities');
-console.log(registerActivities);
+// select every Activity option
+const registerActivities = document.querySelectorAll('.activities input');
+
+//event Listener for Activity checkboxes
+
+document.querySelector('.activities').addEventListener('change', (event) => {
+
+  const clicked = event.target;
+  const clickedTypeDate = clicked.getAttribute('data-day-and-time');
+  const clickedTypeCost = clicked.getAttribute('data-cost');
+
+//loop through the wohle activity options
+  for (let i = 0; i < registerActivities.length; i++) {
+    //get the date and time
+    const checkboxType = registerActivities[i].getAttribute('data-day-and-time');
+
+    // if the same date and time matches and the clicked option is not the loops current iteration
+    if (clickedTypeDate === checkboxType && clicked !== registerActivities[i]) {
+      //and the option is clicked disable the "other" button(s)
+      if (clicked.checked) {
+        registerActivities[i].disabled = true;
+
+      } else {
+
+        registerActivities[i].disabled = false;
+
+      }
+
+    }
+
+
+  }
+});
