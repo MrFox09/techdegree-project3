@@ -87,16 +87,42 @@ designOptions.addEventListener('change', (event)=>{
 
 // select every Activity option
 const registerActivities = document.querySelectorAll('.activities input');
+const activityFieldset = document.querySelector('.activities');
+
+// sum the total costs and create a div to show the total costs
+
+let totalCost = 0;
+const costDiv = document.createElement('div');
+costDiv.textContent = 'Total $ ' + totalCost;
+costDiv.className = 'costDiv';
+activityFieldset.appendChild(costDiv);
+//select the crated div to change the price text
+const lastCostDiv = document.querySelector('.costDiv');
 
 //event Listener for Activity checkboxes
 
-document.querySelector('.activities').addEventListener('change', (event) => {
+activityFieldset.addEventListener('change', (event) => {
 
   const clicked = event.target;
   const clickedTypeDate = clicked.getAttribute('data-day-and-time');
   const clickedTypeCost = clicked.getAttribute('data-cost');
 
-//loop through the wohle activity options
+
+  // when the box is checked the cost adds to totalCost if not then it will be substracted
+  if (clicked.checked) {
+
+    totalCost = totalCost + parseInt(clickedTypeCost, 10);
+    lastCostDiv.textContent = 'Total $ ' + totalCost;
+
+  } else if (clicked.checked !== true) {
+
+    totalCost = totalCost - parseInt(clickedTypeCost, 10);
+    lastCostDiv.textContent = 'Total $ ' + totalCost;
+
+  }
+
+
+  //loop through the wohle activity options
   for (let i = 0; i < registerActivities.length; i++) {
     //get the date and time
     const checkboxType = registerActivities[i].getAttribute('data-day-and-time');
@@ -112,9 +138,8 @@ document.querySelector('.activities').addEventListener('change', (event) => {
         registerActivities[i].disabled = false;
 
       }
-
     }
-
-
   }
+
+
 });
