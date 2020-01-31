@@ -197,20 +197,62 @@ paymentOptions.addEventListener('change', (event) => {
 
 //*** Form Validation***//
 
-const formValidation = ()=>{
+//function who does the formValidation, returns false when it's not correct else true
 
+const formValidation = () => {
+  const nameInput = document.querySelector('#name');
+  const emailInput = document.querySelector('#mail');
+  const emailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i;
+  const creditCardNumberInput = document.querySelector('#cc-num');
+  const zip = document.querySelector('#zip');
+  const cvv = document.querySelector('#cvv');
+  const creditCardNumberRegex = /^\d{13,16}$/;
+  const zipRegex = /^\d{5}$/;
+  const cvvRegex = /^\d{3}$/;
 
+  // checks how many boxes are checked
+  let checkedCounter = 0;
+  for (var i = 0; i < registerActivities.length; i++) {
 
+    if (registerActivities[i].checked === true) {
 
-};
+      checkedCounter = +1;
+    }
+  }
+
+  if (nameInput.value === '') {
+
+    return false;
+
+  } else if (emailRegex.test(emailInput.value) === false) {
+
+    return false;
+
+  } else if (checkedCounter === 0) {
+
+    return false;
+
+  } else if (creditCardOption.selected === true){
+      if (creditCardNumberRegex.test(creditCardNumberInput.value) === false || zipRegex.test(zip.value) === false || cvvRegex.test(cvv.value) === false) {
+      return false;
+    }
+
+  } else {
+    return true;
+  }
+
+  };
 
 
 // eventListener for the submit button
 
 document.querySelector('button[type="submit"]').addEventListener('click', (event) =>{
 
-if (formValidation() !== true) {
+formValidation();
+
+if (formValidation() === false) {
   event.preventDefault();
+  console.log('error');
 }
 
 
@@ -225,4 +267,4 @@ if (formValidation() !== true) {
 
 
 
-  console.log(selectMethodOption);
+  //console.log(registerActivities);
