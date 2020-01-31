@@ -4,6 +4,7 @@
 const jobRoleOptions = document.querySelector('#title');
 const designOptions = document.querySelector('#design');
 const colorOptions = document.querySelector('#color');
+
 //*** Job-Role Section ***//
 
 // set the focus to the first input field "Name" with jQuery
@@ -96,7 +97,8 @@ const costDiv = document.createElement('div');
 costDiv.textContent = 'Total $ ' + totalCost;
 costDiv.className = 'costDiv';
 activityFieldset.appendChild(costDiv);
-//select the crated div to change the price text
+
+//select the created div to change the price text
 const lastCostDiv = document.querySelector('.costDiv');
 
 //event Listener for Activity checkboxes
@@ -143,3 +145,84 @@ activityFieldset.addEventListener('change', (event) => {
 
 
 });
+
+
+//*** Payment Info section***//
+
+//store the different options and div in variables
+const paymentOptions = document.querySelector('#payment');
+const creditCardDiv = document.querySelector('#credit-card');
+const paypalDiv = document.querySelector('#paypal');
+const bitcoinDiv = document.querySelector('#bitcoin');
+
+// inital hide select Method Option, paypalDiv,bitcoinDiv and select the credit card option
+const selectMethodOption = document.querySelector('option[value="select method"]');
+const creditCardOption = document.querySelector('option[value="credit card"]');
+selectMethodOption.style.display = 'none';
+creditCardOption.selected = true;
+paypalDiv.style.display ='none';
+bitcoinDiv.style.display ='none';
+
+// Event Listener for payment section
+
+paymentOptions.addEventListener('change', (event) => {
+
+  const clicked = event.target.value;
+
+  if (clicked === 'credit card') {
+    creditCardDiv.style.display ='';
+    bitcoinDiv.style.display ='none';
+
+
+  } else if (clicked === 'paypal') {
+    creditCardDiv.style.display ='none';
+    bitcoinDiv.style.display ='none';
+    paypalDiv.style.display ='';
+
+
+  } else if (clicked === 'bitcoin') {
+    creditCardDiv.style.display ='none';
+    paypalDiv.style.display ='none';
+    bitcoinDiv.style.display ='';
+
+
+  }
+
+
+
+
+
+
+});
+
+//*** Form Validation***//
+
+const formValidation = ()=>{
+
+
+
+
+};
+
+
+// eventListener for the submit button
+
+document.querySelector('button[type="submit"]').addEventListener('click', (event) =>{
+
+if (formValidation() !== true) {
+  event.preventDefault();
+}
+
+
+});
+
+
+
+
+
+
+
+
+
+
+  console.log(selectMethodOption);
