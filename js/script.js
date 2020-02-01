@@ -267,13 +267,33 @@ const isCvvValid = (input) => {
 };
 
 
-// eventListener for the submit button
+// eventListener for the submit button,show the error message when its fail
 
 document.querySelector('button[type="submit"]').addEventListener('click', (event) => {
-
-  if (isNameValid(nameInput.value) === false || isEmailValid() === false || isCheckboxChecked() === false || isCreditCardValid() === false ) {
+// call the validation functions and if anyone is false it don't sumbit the form
+  if (isNameValid(nameInput.value) === false ) {
     event.preventDefault();
+    showOrHideErrorMessage(true,nameInput.previousElementSibling);
 
+  }if (isEmailValid(emailInput.value) === false ) {
+    event.preventDefault();
+    showOrHideErrorMessage(true,emailInput.previousElementSibling);
+
+  }if (isCheckboxChecked() === false ) {
+    event.preventDefault();
+    showOrHideErrorMessage(true,document.querySelector('#error-checkbox'));
+
+  }if (isCreditCardValid(creditCardNumberInput.value) === false ) {
+    event.preventDefault();
+    showOrHideErrorMessage(true,creditCardNumberInput.previousElementSibling);
+
+  }if (isZipValid(zipInput.value) === false ) {
+    event.preventDefault();
+    showOrHideErrorMessage(true,zipInput.previousElementSibling);
+
+  }if (isCvvValid(cvvInput.value) === false ) {
+    event.preventDefault();
+    showOrHideErrorMessage(true,cvvInput.previousElementSibling);
   }
 });
 
