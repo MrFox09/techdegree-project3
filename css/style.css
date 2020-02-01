@@ -16,18 +16,19 @@ button {
 
 body {
   font: 1em/1.5;
-  color: rgba(6, 49, 68, 0.9);
-	background: #CDE0FB;
+  color: #213480;
+	background: #213475 ;
 }
 
 header {
 	text-align: center;
 }
 
-h1 {
+h1,h2 {
 	font-size: 2.5em;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
 	margin: 0;
+  color: white;
 }
 
 a {
@@ -35,12 +36,12 @@ a {
 }
 
 .error {
-padding: 0.3em 0.3em 0.3em;
+padding: 0.5em 0.5em 0.5em;
 color: #d6463c;
-border: 3px solid #d6463c;
-border-radius: 3px;
-background:#f5f2ed;
-font-weight:bold;
+border: 1px solid #d6463c;
+border-radius: 5px;
+background:#f5f2ed20;
+font-weight:;
 font-size: 18px;
 margin-bottom: -7px;
 }
@@ -50,13 +51,18 @@ margin-bottom: 15px;
 
 }
 
+.costDiv{
+font-weight:bold;
+font-size: 1.25em;
+}
+
 /* =================================
   Form Element Styles
 ==================================== */
 
 form {
 	padding: .875em 1.875em 1.875em;
-	background: #9BBEEF;
+	background: #030407;
 	border: 2px solid rgba(8, 63, 87, 0.6);
 	border-radius: 3px;
 }
@@ -74,13 +80,13 @@ fieldset {
 
 legend,
 button {
-	font-size: 1.25em;
+	font-size: 1.5em;
 }
 
 legend {
 	font-weight: bold;
 	padding-top: .5em;
-	border-top: 2px solid rgba(8, 63, 87, 0.6);
+	border-top: 2px solid #a3a3a330;
 	margin-bottom: 1.125em;
 }
 
@@ -91,7 +97,7 @@ legend {
 }
 
 label {
-	color: #000;
+	color: #a3a3a3;
 	display: block;
 	margin-bottom: .5em;
 }
@@ -99,33 +105,37 @@ label {
 input,
 select {
 	margin-bottom: 1.125em;
+  color:#a3a3a3;
 }
 
 input {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;
-	background: #e9f6fb;
-	border: 2px solid rgb(111, 157, 220);
-	border-radius: 3px;
+	background: #030407;
+	border: 1px solid #a3a3a3;
+	border-radius: 5px;
 	outline: none;
 }
 
 input:focus {
-	background: #fff;
-	border-color: #5e97b0;
+	background: #030407;
+	border-color: #213480;
 	transition: border-color .4s, background-color .4s;
+  color: white;
 }
 
 input[type="checkbox"],
 input[type="radio"] {
 	display: inline-block;
+  width: 18px;
+  height: 18px;
 }
 
 button {
 	color: #fff;
 	padding: .55em 1.25em;
-	background: #083f57;
+	background: #0A87B1;
 	margin: 1.25em 0 .5em;
 	cursor: pointer;
 	border: 2px solid black;
@@ -134,14 +144,18 @@ button {
 }
 
 button:hover {
-	background: #6F9DDC;
+	background: #078473;
 }
 
 input,
 select,
 option {
 	font-family: 'roboto', sans-serif;
+  background:#030407;
+  color: white;
 }
+
+
 
 /* =================================
   Page Styles
@@ -160,8 +174,9 @@ option {
 .shirt-box {
 	width: 100%;
 	padding: 5px;
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 4px;
+	background: #26262625;
+	border-radius: 10px;
+
 }
 
 .interests input {
@@ -178,8 +193,8 @@ option {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding: 5px;
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 4px;
+	background: #26262625;
+	border-radius: 10px;
 }
 
 /* =================================
