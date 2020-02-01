@@ -302,12 +302,13 @@ document.querySelector('button[type="submit"]').addEventListener('click', (event
 
 // function to create Messages
 
-const errorMessage = (message,parent,addSpanTo, IdName)=>{
-  const newSpan = document.createElement('span');
-  newSpan.setAttribute('ID', IdName);
-  newSpan.textContent = message;
-  parent.insertBefore(newSpan,addSpanTo);
-  newSpan.style.display ='none';
+const errorMessage = (message,parent,addDivTo, IdName)=>{
+  const newDiv = document.createElement('div');
+  newDiv.setAttribute('ID', IdName);
+  newDiv.className = 'error';
+  newDiv.textContent = message;
+  parent.insertBefore(newDiv,addDivTo);
+  newDiv.style.display ='none';
 
 };
 
@@ -324,10 +325,10 @@ errorMessage('check at least one activity', activityFieldset, document.querySele
 errorMessage('accept number 13-14 digits', document.querySelector('div[class="col-6 col"]'),creditCardNumberInput, 'error-creditcard');
 
 
-errorMessage('a Zip Code (5 digits)', document.querySelector('div[class="col-3 col"]'),zipInput, 'error-zip');
+errorMessage('5 digits', document.querySelector('div[class="col-3 col"]'),zipInput, 'error-zip');
 
 
-errorMessage('a CVV (3 digits))', document.querySelector('div[logic="jscvv"]'),cvvInput, 'error-cvv');
+errorMessage('3 digits', document.querySelector('div[logic="jscvv"]'),cvvInput, 'error-cvv');
 
  // show element when show is true, hide when false
 const showOrHideErrorMessage = (show, element) => {
