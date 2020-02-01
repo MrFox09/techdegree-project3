@@ -4,6 +4,11 @@
 const jobRoleOptions = document.querySelector('#title');
 const designOptions = document.querySelector('#design');
 const colorOptions = document.querySelector('#color');
+const nameInput = document.querySelector('#name');
+const emailInput = document.querySelector('#mail');
+const creditCardNumberInput = document.querySelector('#cc-num');
+const zipInput =  document.querySelector('#zip');
+const cvvInput =  document.querySelector('#cvv');
 
 //*** Job-Role Section ***//
 
@@ -172,6 +177,7 @@ paymentOptions.addEventListener('change', (event) => {
   if (clicked === 'credit card') {
     creditCardDiv.style.display ='';
     bitcoinDiv.style.display ='none';
+    paypalDiv.style.display ='none';
 
 
   } else if (clicked === 'paypal') {
@@ -197,20 +203,29 @@ paymentOptions.addEventListener('change', (event) => {
 
 //*** Form Validation***//
 
-//function who does the formValidation, returns false when it's not correct else true
+//validation expressions
 
-const formValidation = () => {
-  const nameInput = document.querySelector('#name');
-  const emailInput = document.querySelector('#mail');
-  const emailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i;
-  const creditCardNumberInput = document.querySelector('#cc-num');
-  const zip = document.querySelector('#zip');
-  const cvv = document.querySelector('#cvv');
-  const creditCardNumberRegex = /^\d{13,16}$/;
-  const zipRegex = /^\d{5}$/;
-  const cvvRegex = /^\d{3}$/;
+const emailRegex = /^[^@]+@[^@.]+\.[a-z]+$/i;
+const creditCardNumberRegex = /^\d{13,16}$/;
+const zipRegex = /^\d{5}$/;
+const cvvRegex = /^\d{3}$/;
 
-  // checks how many boxes are checked
+
+//check if the name field contains a text or number
+const isNameValid = (input) => {
+
+  return /^[a-z]+$/.test(input);
+
+};
+
+// check if the eMail is valid
+const isEmailValid = (input) => {
+  return emailRegex.test(input);
+};
+
+// checks how many boxes are checked and returns the value
+const isCheckboxChecked = () => {
+
   let checkedCounter = 0;
   for (var i = 0; i < registerActivities.length; i++) {
 
@@ -219,48 +234,110 @@ const formValidation = () => {
       checkedCounter = +1;
     }
   }
-
-  if (nameInput.value === '') {
-
+  if (checkedCounter === 0) {
     return false;
-
-  } else if (emailRegex.test(emailInput.value) === false) {
-
-    return false;
-
-  } else if (checkedCounter === 0) {
-
-    return false;
-
-  } else if (creditCardOption.selected === true){
-      if (creditCardNumberRegex.test(creditCardNumberInput.value) === false || zipRegex.test(zip.value) === false || cvvRegex.test(cvv.value) === false) {
-      return false;
-    }
-
   } else {
     return true;
   }
 
-  };
+};
+
+// check if the credit card section is valid
+
+const isCreditCardValid = (input) => {
+
+  if (creditCardOption.selected === true) {
+    return creditCardNumberRegex.test(input);
+
+  }
+};
+
+const isZipValid = (input) => {
+
+  if (creditCardOption.selected === true) {
+    return  zipRegex.test(input);
+  }
+};
+
+const isCvvValid = (input) => {
+
+  if (creditCardOption.selected === true) {
+    return  cvvRegex.test(input);
+  }
+};
 
 
 // eventListener for the submit button
 
-document.querySelector('button[type="submit"]').addEventListener('click', (event) =>{
+document.querySelector('button[type="submit"]').addEventListener('click', (event) => {
 
-formValidation();
+  if (isNameValid(nameInput.value) === false || isEmailValid() === false || isCheckboxChecked() === false || isCreditCardValid() === false ) {
+    event.preventDefault();
 
-if (formValidation() === false) {
-  event.preventDefault();
-  console.log('error');
-}
-
-
+  }
 });
 
+//*** Error Messages***//
+
+// function to create Messages
+
+const errorMessage = (message,parent,addSpanTo, IdName)=>{
+  const newSpan = document.createElement('span');
+  newSpan.setAttribute('ID', IdName);
+  newSpan.textContent = message;
+  parent.insertBefore(newSpan,addSpanTo);
+  newSpan.style.display ='none';
+
+};
+
+//error Message for the Name Field
+errorMessage('can only contain letters', document.querySelector('fieldset'),nameInput ,'error-name');
+
+//error Message for the Email Field
+errorMessage('Please enter a vaild Email adress', document.querySelector('fieldset'),emailInput ,'error-email');
+
+//error Message for the registerActivities
+errorMessage('check at least one activity', activityFieldset, document.querySelector('fieldset[class="activities"] label') ,'error-checkbox');
+
+//error Message for the CreditCard Number Field and the Zip Code Field the CVV Field
+errorMessage('accept number 13-14 digits', document.querySelector('div[class="col-6 col"]'),creditCardNumberInput, 'error-creditcard');
 
 
+errorMessage('a Zip Code (5 digits)', document.querySelector('div[class="col-3 col"]'),zipInput, 'error-zip');
 
+
+errorMessage('a CVV (3 digits))', document.querySelector('div[logic="jscvv"]'),cvvInput, 'error-cvv');
+
+ // show element when show is true, hide when false
+const showOrHideErrorMessage = (show, element) => {
+  if (show) {
+    element.style.display = '';
+  } else {
+    element.style.display = 'none';
+  }
+};
+
+//function to create a Event listener and calls the validation function(s)
+const createListener = (validator) => {
+  return e => {
+    const text = e.target.value;
+    const valid = validator(text);
+    const showTip = text !== "" && !valid;
+    const message = e.target.previousElementSibling;
+    showOrHideErrorMessage(showTip, message);
+  };
+};
+// Event Listeners they call the createListener function with the valid method as a parameter, when an input occurs
+
+nameInput.addEventListener("input", createListener(isNameValid));
+
+emailInput.addEventListener("input", createListener(isEmailValid));
+
+creditCardNumberInput.addEventListener("input", createListener(isCreditCardValid));
+
+zipInput.addEventListener("input", createListener(isZipValid));
+
+cvvInput.addEventListener("input", createListener(isCvvValid));
 
 
 
