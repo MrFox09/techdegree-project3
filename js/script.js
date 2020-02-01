@@ -120,6 +120,7 @@ activityFieldset.addEventListener('change', (event) => {
 
     totalCost = totalCost + parseInt(clickedTypeCost, 10);
     lastCostDiv.textContent = 'Total $ ' + totalCost;
+    document.querySelector('#error-checkbox').style.display ='none';
 
   } else if (clicked.checked !== true) {
 
@@ -358,10 +359,3 @@ creditCardNumberInput.addEventListener("input", createListener(isCreditCardValid
 zipInput.addEventListener("input", createListener(isZipValid));
 
 cvvInput.addEventListener("input", createListener(isCvvValid));
-
-
-
-
-
-
-  //console.log(registerActivities);
