@@ -140,10 +140,14 @@ activityFieldset.addEventListener('change', (event) => {
       //and the option is clicked disable the "other" button(s)
       if (clicked.checked) {
         registerActivities[i].disabled = true;
+        
+
+
 
       } else {
 
         registerActivities[i].disabled = false;
+
 
       }
     }
@@ -215,7 +219,7 @@ const cvvRegex = /^\d{3}$/;
 //check if the name field contains a text or number
 const isNameValid = (input) => {
 
-  return /^[a-z]+$/.test(input);
+  return /^[\w\s]+$/i.test(input);
 
 };
 
@@ -313,16 +317,16 @@ const errorMessage = (message,parent,addDivTo, IdName)=>{
 };
 
 //error Message for the Name Field
-errorMessage('can only contain letters', document.querySelector('fieldset'),nameInput ,'error-name');
+errorMessage("can't be blank", document.querySelector('fieldset'),nameInput ,'error-name');
 
 //error Message for the Email Field
 errorMessage('Please enter a vaild Email adress', document.querySelector('fieldset'),emailInput ,'error-email');
 
 //error Message for the registerActivities
-errorMessage('check at least one activity', activityFieldset, document.querySelector('fieldset[class="activities"] label') ,'error-checkbox');
+errorMessage('Select at least one activity', activityFieldset, document.querySelector('fieldset[class="activities"] label') ,'error-checkbox');
 
 //error Message for the CreditCard Number Field and the Zip Code Field the CVV Field
-errorMessage('accept number 13-14 digits', document.querySelector('div[class="col-6 col"]'),creditCardNumberInput, 'error-creditcard');
+errorMessage('Accept 13-16 digits', document.querySelector('div[class="col-6 col"]'),creditCardNumberInput, 'error-creditcard');
 
 
 errorMessage('5 digits', document.querySelector('div[class="col-3 col"]'),zipInput, 'error-zip');
