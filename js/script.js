@@ -295,18 +295,18 @@ document.querySelector('button[type="submit"]').addEventListener('click', (event
     showOrHideErrorMessage(true, document.querySelector('#error-checkbox'));
 
   }
-  if (creditCardNumberInput.value === '' || isCreditCardValid(creditCardNumberInput.value) === false) {
+  if (creditCardOption.selected === true &&creditCardNumberInput.value === '' || isCreditCardValid(creditCardNumberInput.value) === false) {
     event.preventDefault();
     document.querySelector('#error-creditcard').textContent = "Cant't be blank, it should have 13-16 Numbers";
     showOrHideErrorMessage(true, creditCardNumberInput.previousElementSibling);
 
   }
-  if (isZipValid(zipInput.value) === false) {
+  if (creditCardOption.selected === true &&isZipValid(zipInput.value) === false) {
     event.preventDefault();
     showOrHideErrorMessage(true, zipInput.previousElementSibling);
 
   }
-  if (isCvvValid(cvvInput.value) === false) {
+  if (creditCardOption.selected === true && isCvvValid(cvvInput.value) === false) {
     event.preventDefault();
     showOrHideErrorMessage(true, cvvInput.previousElementSibling);
   }
@@ -327,7 +327,7 @@ const errorMessage = (message, parent, addDivTo, IdName) => {
 };
 
 //error Message for the Name Field
-errorMessage("Can't be blank", document.querySelector('fieldset'), nameInput, 'error-name');
+errorMessage("Can't be blank // only numbers and figures", document.querySelector('fieldset'), nameInput, 'error-name');
 
 //error Message for the Email Field
 errorMessage('Please enter a valid Email', document.querySelector('fieldset'), emailInput, 'error-email');
