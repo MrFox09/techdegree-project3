@@ -147,10 +147,12 @@ activityFieldset.addEventListener('change', (event) => {
       //and the option is clicked disable the "other" button(s)
       if (clicked.checked) {
         registerActivities[i].disabled = true;
+        registerActivities[i].parentElement.style.color = "red";
 
       } else {
 
         registerActivities[i].disabled = false;
+        registerActivities[i].parentElement.style.color = '#a3a3a3';
 
       }
     }
